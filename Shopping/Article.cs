@@ -1,4 +1,6 @@
-﻿namespace Shopping
+﻿using System.Xml.Linq;
+
+namespace Shopping
 {
     public class Article
     {
@@ -9,13 +11,13 @@
         #region public methods
         public Article(float price)
         {
-            throw new NotImplementedException();
+            _price = price;
         }
         public float Price
         {
             get
             {
-                throw new NotImplementedException();
+                return _price;
             }
         }
         #endregion public methods

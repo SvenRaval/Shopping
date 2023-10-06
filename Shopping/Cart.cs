@@ -11,21 +11,35 @@ namespace Shopping
         #region public methods
         public void Add(List<Article> articles)
         {
-            throw new NotImplementedException();
+            _articles = articles;
         }
 
         public List<Article> Remove(Boolean clearCart = false)
         {
             List<Article> articlesReadyToCheckout = new List<Article>();
-            if (clearCart) 
+            if (clearCart)
             {
-                throw new NotImplementedException();
+                articlesReadyToCheckout.AddRange(_articles);
+                _articles = new List<Article>(); // Initialize as a new empty list
             }
             else
             {
-                throw new NotImplementedException();
+                if (_articles.Count > 0)
+                {
+                    // Remove the last article from the cart
+                    Article lastArticle = _articles[_articles.Count - 1];
+                    _articles.Remove(lastArticle);
+                    articlesReadyToCheckout.Add(lastArticle);
+                }
+                else
+                {
+                    throw new InvalidOperationException("The cart is empty. Cannot remove an article.");
+                }
             }
+
+            return articlesReadyToCheckout;
         }
+
 
         public void Release()
         {
@@ -36,7 +50,7 @@ namespace Shopping
         {
             get
             {
-                throw new NotImplementedException();
+                return _articles;
             }
         }
 

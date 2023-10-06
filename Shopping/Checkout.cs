@@ -5,12 +5,15 @@
         #region private attributes
         private List<Article> _articles = new List<Article>();
         private float _balance = 0f;
+        private float _updateBalance = 0f;
         #endregion private attributes
 
         #region public methods
         public void Add(List<Article> articles)
         {
-            throw new NotImplementedException();
+            Articles.AddRange(articles);
+            _balance += articles.Count;
+            UpdateBalance();
         }
 
         public List<Article> Remove(Boolean empty = false)
@@ -22,7 +25,7 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return _articles;
             }
         }
 
@@ -30,7 +33,8 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return _balance;
+                UpdateBalance();
             }
         }
 
@@ -44,7 +48,7 @@
         private void UpdateBalance()
         {
             {
-                throw new NotImplementedException();
+                _updateBalance = _balance;
             }
         }
         #endregion private methods

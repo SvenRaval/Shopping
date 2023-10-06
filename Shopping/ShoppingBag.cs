@@ -1,6 +1,6 @@
 ﻿namespace Shopping
 {
-    public class ShoppingBag:ICollectionOfArticles
+    public class ShoppingBag
     {
         #region private attributes
         private List<Article> articles = new List<Article>();

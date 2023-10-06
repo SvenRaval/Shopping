@@ -1,11 +1,12 @@
 using Shopping;
+using static Shopping.CartItem;
 
 namespace TestShopping
 {
-    public class TestArticleItem
+    public class TestCartItem
     {
         #region private attributes
-        private CartItem _cartItem = null;
+        private CartItem? _cartItem = null;
         private Article? _article = null;
         private float _price = 0f;
         private int _quantity = 0;
@@ -32,6 +33,32 @@ namespace TestShopping
             //then
             Assert.AreEqual(_cartItem.Article.Price, _price);
             Assert.AreEqual(_cartItem.Quantity, _quantity);
+        }
+
+        [Test]
+        public void SetQuantity_CorrectValue_GetNewValue()
+        {
+            //given
+            int expectedQuantity = 2;
+
+            //when
+            _cartItem.Quantity = expectedQuantity;
+
+            //then
+            Assert.AreEqual(_cartItem.Quantity, expectedQuantity);
+        }
+
+        [Test]
+        public void SetQuantity_WrongValue_ThrowException()
+        {
+            //given
+            int expectedQuantity = -2;
+
+            //when
+            Assert.Throws<WrongQuantityException>(() => _cartItem.Quantity = expectedQuantity);
+            
+            //then
+            //throws exception
         }
     }
 }

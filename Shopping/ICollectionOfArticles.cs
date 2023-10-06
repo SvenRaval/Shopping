@@ -8,8 +8,8 @@ namespace Shopping
 {
     internal interface ICollectionOfArticles
     {
-        void Add(List<Article> articles);
-        List<Article> Remove(Boolean empty=false);
-        List<Article> Articles { get; }
+        void Add(List<CartItem> cartItems);
+        List<CartItem> Remove(Boolean empty=false);
+        List<CartItem> CartItems { get; }
     }
 }

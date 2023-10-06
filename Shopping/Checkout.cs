@@ -18,7 +18,21 @@
 
         public List<Article> Remove(Boolean empty = false)
         {
-            throw new NotImplementedException();
+            List<Article> articleReadyToCheckout = new List<Article>(_articles);
+
+            if (empty)
+            {
+                _articles.Clear();
+            }
+            else
+            {
+                if (_articles.Count > 0)
+                {
+                    articleReadyToCheckout.Add(_articles[0]);
+                    _articles.RemoveAt(0);
+                }
+            }
+            return articleReadyToCheckout;
         }
 
         public List<Article> Articles

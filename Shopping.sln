@@ -7,7 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shopping", "Shopping\Shoppi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestShopping", "TestShopping\TestShopping.csproj", "{32793A54-03E6-45DF-BABC-277849DB882F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShoppingApp", "ShoppingApp\ShoppingApp.csproj", "{1DE5A3AF-999E-4CA9-AC72-3523DAE9A1CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ShoppingApp", "ShoppingApp\ShoppingApp.csproj", "{1DE5A3AF-999E-4CA9-AC72-3523DAE9A1CA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9DE4602A-472B-45F5-AD86-E9646E9D8D9C}"
+	ProjectSection(SolutionItems) = preProject
+		Docs\Shopping_ClassDiagram.PNG = Docs\Shopping_ClassDiagram.PNG
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

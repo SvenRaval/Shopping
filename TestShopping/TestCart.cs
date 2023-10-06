@@ -5,7 +5,7 @@ namespace TestShopping
     public class TestCart
     {
         #region private attributes
-        private Cart _cart = null;
+        private Cart? _cart = null;
         #endregion private attributes
 
         [SetUp]

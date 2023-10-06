@@ -5,7 +5,7 @@ namespace TestShopping
     public class TestArticle
     {
         #region private attributes
-        private Article _article = null;
+        private Article? _article = null;
         private float _price = 0f;
         #endregion private attributes
 

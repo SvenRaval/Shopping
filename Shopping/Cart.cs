@@ -5,11 +5,11 @@ namespace Shopping
     public class Cart : ICollectionOfArticles
     {
         #region private attributes
-        private List<CartItem> _articleItems = new List<CartItem>();
+        private List<CartItem> _cartItems = new List<CartItem>();
         #endregion private attributes
 
         #region public methods
-        public void Add(List<CartItem> articleItems)
+        public void Add(List<CartItem> cartItems)
         {
             _articles = articles;
         }
@@ -51,6 +51,14 @@ namespace Shopping
             get
             {
                 return _articles;
+            }
+        }
+
+        public float Price
+        {
+            get
+            {
+                throw new NotImplementedException();
             }
         }
 

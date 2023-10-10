@@ -13,6 +13,8 @@ namespace Shopping
         #region public methods
         public Article(int id, string description, float price)
         {
+            _id = id;
+            _description = description;
             _price = price;
         }
 
@@ -21,7 +23,7 @@ namespace Shopping
         {
             get
             {
-                throw new NotImplementedException();
+                return _id;
             }
         }
 
@@ -29,7 +31,7 @@ namespace Shopping
         {
             get
             {
-                throw new NotImplementedException();
+                return _description;
             }
         }
 

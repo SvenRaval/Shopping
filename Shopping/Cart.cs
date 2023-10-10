@@ -32,9 +32,16 @@ namespace Shopping
         {
             get
             {
-                throw new NotImplementedException();
+                float totalPrice = 0.00f;
+
+                foreach (CartItem cartItem in _cartItems)
+                {
+                    totalPrice += cartItem.Article.Price * cartItem.Quantity;
+                }
+
+                return totalPrice;
             }
         }
         #endregion public methods
-    }
+    }   
 }

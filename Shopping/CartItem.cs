@@ -12,8 +12,8 @@ namespace Shopping
         #region public methods
         public CartItem(Article article, int quantity)
         {
-            _article =article;
-            _quantity = quantity;
+            _article = article;
+            Quantity = quantity; // Use the property setter to perform validation
         }
 
         public Article Article
@@ -32,6 +32,11 @@ namespace Shopping
             }
             set
             {
+                if (value <= 0)
+                {
+                    throw new WrongQuantityException();
+                }
+
                 _quantity = value;
             }
         }
@@ -40,4 +45,5 @@ namespace Shopping
         public class CartItemException : Exception { }
         public class WrongQuantityException : CartItemException { }
     }
+
 }

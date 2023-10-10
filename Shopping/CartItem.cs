@@ -36,7 +36,6 @@ namespace Shopping
                 {
                     throw new WrongQuantityException();
                 }
-
                 _quantity = value;
             }
         }

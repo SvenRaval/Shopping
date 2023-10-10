@@ -32,13 +32,11 @@ namespace Shopping
         {
             get
             {
-                float totalPrice = 0.00f;
-
-                foreach (CartItem cartItem in _cartItems)
+                float totalPrice = 0f;
+                foreach (var cartItem in _cartItems)
                 {
                     totalPrice += cartItem.Article.Price * cartItem.Quantity;
                 }
-
                 return totalPrice;
             }
         }

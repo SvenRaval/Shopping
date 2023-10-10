@@ -19,10 +19,11 @@ namespace TestShopping
         {
             //given
             //refer to Setup
-            float expectedArticlePrice = 4.5f;
-            Article expectedArticle = new Article(expectedArticlePrice);
-            int expectedQuantity = 1;
-            CartItem expectedCartItem = new CartItem(expectedArticle, expectedQuantity);
+            int expectedArticlesQuantity = 1;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
+
+            int expectedArticleInCartItem = 1;
+            CartItem expectedCartItem = new CartItem(expectedArticles[0], expectedArticleInCartItem);
             List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem };
             Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
 
@@ -30,8 +31,8 @@ namespace TestShopping
             _cart.Add(expectedCartItems);
 
             //then
-            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedQuantity));
-            Assert.That(_cart.Price, Is.EqualTo(expectedArticlePrice));
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedArticlesQuantity));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
         }
 
         [Test]
@@ -39,16 +40,14 @@ namespace TestShopping
         {
             //given
             //refer to Setup
-            //TODO must be generated automatically
-            float expectedArticlePrice1 = 4.5f;
-            Article expectedArticle1 = new Article(expectedArticlePrice1);
+            int expectedArticlesQuantity = 2;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
+            
             int expectedQuantity1 = 1;
-            CartItem expectedCartItem1 = new CartItem(expectedArticle1, expectedQuantity1);
+            CartItem expectedCartItem1 = new CartItem(expectedArticles[0], expectedQuantity1);
 
-            float expectedArticlePrice2 = 5.0f;
-            Article expectedArticle2 = new Article(expectedArticlePrice2);
             int expectedQuantity2 = 1;
-            CartItem expectedCartItem2 = new CartItem(expectedArticle2, expectedQuantity2);
+            CartItem expectedCartItem2 = new CartItem(expectedArticles[1], expectedQuantity2);
 
             List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem1, expectedCartItem2 };
             Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
@@ -58,7 +57,7 @@ namespace TestShopping
 
             //then
             Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedQuantity1 + expectedQuantity2));
-            Assert.That(_cart.Price, Is.EqualTo(expectedArticlePrice1 + expectedArticlePrice2));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
         }
 
         [Test]
@@ -66,12 +65,11 @@ namespace TestShopping
         {
             //given
             //refer to Setup
-            //TODO must be generated automatically
-            float expectedArticlePriced = 4.5f;
-            Article expectedArticle = new Article(expectedArticlePriced);
-            int expectedQuantity = 2;
-            CartItem expectedCartItem = new CartItem(expectedArticle, expectedQuantity);
+            int expectedArticlesQuantity = 1;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
 
+            int expectedArticleInCartItem = 2;
+            CartItem expectedCartItem = new CartItem(expectedArticles[0], expectedArticleInCartItem);
             List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem };
             Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
 
@@ -79,8 +77,39 @@ namespace TestShopping
             _cart.Add(expectedCartItems);
 
             //then
-            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedQuantity));
-            Assert.That(_cart.Price, Is.EqualTo(expectedArticlePriced * expectedQuantity));
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedArticlesQuantity));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
+        }
+
+        [Test]
+        public void Price_EmptyCart_GetPrice()
+        {
+            //given
+            float expectedPrice = 0.00f;
+
+            //when
+
+            //then
+            Assert.That(_cart.Price, Is.EqualTo(expectedPrice));
+        }
+
+        [Test]
+        public void Price_NotEmptyCart_GetPrice()
+        {
+            //given
+            List<Article> articles = ArticleGenerator.Generate(5);
+            List<CartItem> cartItems = new List<CartItem>();
+            foreach(Article article in articles)
+            {
+                cartItems.Add(new CartItem(article, 1));
+            }
+            float expectedPrice = 30.00f;
+            _cart.Add(cartItems);
+
+            //when
+
+            //then
+            Assert.That(_cart.Price, Is.EqualTo(expectedPrice));
         }
     }
 }

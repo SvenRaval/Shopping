@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;  // Add this for List<T>
+using System.Net.Http.Headers;
 
 namespace Shopping
 {
@@ -13,6 +13,11 @@ namespace Shopping
         public void Add(List<CartItem> cartItems)
         {
             _cartItems.AddRange(cartItems);  // Use the correct variable name
+        }
+
+        public void Remove(List<CartItem> cartItemsToRemove)
+        {
+            throw new NotImplementedException();
         }
 
         public List<CartItem> CartItems
@@ -30,8 +35,6 @@ namespace Shopping
                 throw new NotImplementedException();
             }
         }
-
-        public bool? IsReleased { get; set; }
         #endregion public methods
     }
 }

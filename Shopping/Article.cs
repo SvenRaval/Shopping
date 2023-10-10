@@ -13,6 +13,23 @@ namespace Shopping
         {
             _price = price;
         }
+
+
+        public int Id
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        public string Description
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
         public float Price
         {
             get

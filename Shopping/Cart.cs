@@ -3,7 +3,7 @@ using System.Collections.Generic;  // Add this for List<T>
 
 namespace Shopping
 {
-    public class Cart : ICollectionOfArticles
+    public class Cart
     {
         #region private attributes
         private List<CartItem> _cartItems = new List<CartItem>();
@@ -15,38 +15,7 @@ namespace Shopping
             _cartItems.AddRange(cartItems);  // Use the correct variable name
         }
 
-        public List<CartItem> Remove(Boolean clearCart = false)
-        {
-            List<CartItem> cartItemsReadyToCheckout = new List<CartItem>();  // Change Article to CartItem
-            if (clearCart)
-            {
-                cartItemsReadyToCheckout.AddRange(_cartItems);
-                _cartItems = new List<CartItem>();  // Initialize as a new empty list
-            }
-            else
-            {
-                if (_cartItems.Count > 0)
-                {
-                    // Remove the last item from the cart
-                    CartItem lastItem = _cartItems[_cartItems.Count - 1];
-                    _cartItems.Remove(lastItem);
-                    cartItemsReadyToCheckout.Add(lastItem);
-                }
-                else
-                {
-                    throw new InvalidOperationException("The cart is empty. Cannot remove an item.");
-                }
-            }
-
-            return cartItemsReadyToCheckout;
-        }
-
-        public void Release()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<CartItem> CartItems  // Change Article to CartItem
+        public List<CartItem> CartItems
         {
             get
             {

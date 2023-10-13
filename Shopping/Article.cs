@@ -1,4 +1,5 @@
-﻿using System.Xml.Linq;
+﻿using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Shopping
 {
@@ -35,7 +36,19 @@ namespace Shopping
             }
             set
             {
-                throw new NotImplementedException();
+                if (value.Length >= 50)
+                {
+                    throw new TooLongDescriptionException();
+                }
+                if (value.Split(' ', StringSplitOptions.RemoveEmptyEntries).Length < 2)
+                {
+                    throw new TooShortDescriptionException();
+                }
+                if (value.Any((ch) => !char.IsLetterOrDigit(ch) && !char.IsSeparator(ch)) )
+                {
+                    throw new SpecialCharInDescriptionException();
+                } 
+                _description = value;
             }
         }
 

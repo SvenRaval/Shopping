@@ -1,60 +1,45 @@
-﻿using System.Net.Http.Headers;
+﻿using System;
+using System.Net.Http.Headers;
 
 namespace Shopping
 {
-    public class Cart : ICollectionOfArticles
+    public class Cart
     {
         #region private attributes
-        private List<Article> _articles = new List<Article>();
+        private List<CartItem> _cartItems = new List<CartItem>();
         #endregion private attributes
 
         #region public methods
-        public void Add(List<Article> articles)
+        public void Add(List<CartItem> cartItems)
         {
-            _articles = articles;
+            _cartItems.AddRange(cartItems);  // Use the correct variable name
         }
 
-        public List<Article> Remove(Boolean clearCart = false)
-        {
-            List<Article> articlesReadyToCheckout = new List<Article>();
-            if (clearCart)
-            {
-                articlesReadyToCheckout.AddRange(_articles);
-                _articles = new List<Article>(); // Initialize as a new empty list
-            }
-            else
-            {
-                if (_articles.Count > 0)
-                {
-                    // Remove the last article from the cart
-                    Article lastArticle = _articles[_articles.Count - 1];
-                    _articles.Remove(lastArticle);
-                    articlesReadyToCheckout.Add(lastArticle);
-                }
-                else
-                {
-                    throw new InvalidOperationException("The cart is empty. Cannot remove an article.");
-                }
-            }
-
-            return articlesReadyToCheckout;
-        }
-
-
-        public void Release()
+        public void Remove(List<CartItem> cartItemsToRemove)
         {
             throw new NotImplementedException();
         }
 
-        public List<Article> Articles
+        public List<CartItem> CartItems
         {
             get
             {
-                return _articles;
+                return _cartItems;
             }
         }
 
-        public bool? IsReleased { get; set; }
+        public float Price
+        {
+            get
+            {
+                float totalPrice = 0f;
+                foreach (var cartItem in _cartItems)
+                {
+                    totalPrice += cartItem.Article.Price * cartItem.Quantity;
+                }
+                return totalPrice;
+            }
+        }
         #endregion public methods
-    }
+    }   
 }

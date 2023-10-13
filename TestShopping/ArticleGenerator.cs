@@ -10,7 +10,7 @@ namespace TestShopping
                 List<Article> articles = new List<Article>();
                 for (int i = 1; i <= amountOfArticles; i++)
                 {
-                    articles.Add(new Article(i));
+                    articles.Add(new Article(i, "description" + i, i+1 * i));
                 }
                 return articles;
             }

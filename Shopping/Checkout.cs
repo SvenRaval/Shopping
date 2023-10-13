@@ -1,6 +1,6 @@
 ﻿namespace Shopping
 {
-    public class Checkout : ICollectionOfArticles
+    public class Checkout
     {
         #region private attributes
         private List<Article> _articles = new List<Article>();

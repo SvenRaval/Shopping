@@ -5,7 +5,7 @@ namespace TestShopping
     public class TestCart
     {
         #region private attributes
-        private Cart _cart = null;
+        private Cart? _cart = null;
         #endregion private attributes
 
         [SetUp]
@@ -15,58 +15,101 @@ namespace TestShopping
         }
 
         [Test]
-        public void Add_FirstArticle_Success()
+        public void Add_FirstSingleCartItem_Success()
         {
             //given
             //refer to Setup
-            Assert.That(_cart.Articles.Count(), Is.EqualTo(0));
+            int expectedArticlesQuantity = 1;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
+
+            int expectedArticleInCartItem = 1;
+            CartItem expectedCartItem = new CartItem(expectedArticles[0], expectedArticleInCartItem);
+            List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem };
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
 
             //when
-            _cart.Add(ArticleGenerator.Generate(1));
+            _cart.Add(expectedCartItems);
 
             //then
-            Assert.That(_cart.Articles.Count(), Is.EqualTo(1));
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedArticlesQuantity));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
         }
 
         [Test]
-        public void Remove_OneArticleFromCartWithArticles_Success()
+        public void Add_MultipleSingleCartItems_Success()
         {
             //given
             //refer to Setup
-            int amountOfArticlesToAdd = 10;
-            List<Article> expectedArticles = ArticleGenerator.Generate(amountOfArticlesToAdd);
-            List<Article> articlesReadyToCheckout = new List<Article>();
-
-            _cart.Add(expectedArticles);
-            Assert.AreEqual(expectedArticles.Count(), _cart.Articles.Count());
-
-            //when
-            articlesReadyToCheckout = _cart.Remove();
-
-            //then
-            Assert.AreEqual(amountOfArticlesToAdd-1, _cart.Articles.Count());
-            Assert.AreEqual(1, articlesReadyToCheckout.Count());
-        }
-
-        [Test]
-        public void Remove_AllProductsFromCartWithArticles_Success()
-        {
-            //given
-            //refer to Setup
-            int amountOfArticlesToAdd = 10;
-            List<Article> expectedArticles = ArticleGenerator.Generate(amountOfArticlesToAdd);
-            List<Article> articlesReadyToCheckout = new List<Article>();
+            int expectedArticlesQuantity = 2;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
             
-            _cart.Add(expectedArticles);
-            Assert.AreEqual(expectedArticles.Count(), _cart.Articles.Count());
+            int expectedQuantity1 = 1;
+            CartItem expectedCartItem1 = new CartItem(expectedArticles[0], expectedQuantity1);
+
+            int expectedQuantity2 = 1;
+            CartItem expectedCartItem2 = new CartItem(expectedArticles[1], expectedQuantity2);
+
+            List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem1, expectedCartItem2 };
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
 
             //when
-            articlesReadyToCheckout = _cart.Remove(true);
+            _cart.Add(expectedCartItems);
 
             //then
-            Assert.AreEqual(0, _cart.Articles.Count());
-            Assert.AreEqual(expectedArticles.Count(), articlesReadyToCheckout.Count());
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedQuantity1 + expectedQuantity2));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
+        }
 
+        [Test]
+        public void Add_OneMultipleCartItems_Success()
+        {
+            //given
+            //refer to Setup
+            int expectedArticlesQuantity = 1;
+            List<Article> expectedArticles = ArticleGenerator.Generate(expectedArticlesQuantity);
+
+            int expectedArticleInCartItem = 2;
+            CartItem expectedCartItem = new CartItem(expectedArticles[0], expectedArticleInCartItem);
+            List<CartItem> expectedCartItems = new List<CartItem> { expectedCartItem };
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(0));
+
+            //when
+            _cart.Add(expectedCartItems);
+
+            //then
+            Assert.That(_cart.CartItems.Count(), Is.EqualTo(expectedArticlesQuantity));
+            Assert.That(_cart.CartItems, Is.EqualTo(expectedCartItems));
+        }
+
+        [Test]
+        public void Price_EmptyCart_GetPrice()
+        {
+            //given
+            float expectedPrice = 0.00f;
+
+            //when
+
+            //then
+            Assert.That(_cart.Price, Is.EqualTo(expectedPrice));
+        }
+
+        [Test]
+        public void Price_NotEmptyCart_GetPrice()
+        {
+            //given
+            List<Article> articles = ArticleGenerator.Generate(5);
+            List<CartItem> cartItems = new List<CartItem>();
+            foreach(Article article in articles)
+            {
+                cartItems.Add(new CartItem(article, 1));
+            }
+            float expectedPrice = 30.00f;
+            _cart.Add(cartItems);
+
+            //when
+
+            //then
+            Assert.That(_cart.Price, Is.EqualTo(expectedPrice));
         }
     }
 }

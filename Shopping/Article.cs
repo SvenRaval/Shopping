@@ -33,6 +33,10 @@ namespace Shopping
             {
                 return _description;
             }
+            set
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public float Price
@@ -43,5 +47,10 @@ namespace Shopping
             }
         }
         #endregion public methods
+
+        public class ArticleException : Exception { }
+        public class TooShortDescriptionException : ArticleException { }
+        public class SpecialCharInDescriptionException : ArticleException { }
+        public class TooLongDescriptionException : ArticleException { }
     }
 }

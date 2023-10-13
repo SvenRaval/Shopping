@@ -15,7 +15,7 @@ namespace Shopping
             _cartItems.AddRange(cartItems);  // Use the correct variable name
         }
 
-        public void Remove(List<CartItem> cartItemsToRemove)
+        public void Remove(List<CartItem> cartItemsToRemove = null)
         {
             throw new NotImplementedException();
         }
@@ -40,6 +40,12 @@ namespace Shopping
                 return totalPrice;
             }
         }
+
+        public int Cheapest()
+        {
+            throw new NotImplementedException();
+        }
         #endregion public methods
-    }   
+        public class CartException : Exception { }
+    }
 }

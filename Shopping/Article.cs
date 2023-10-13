@@ -36,6 +36,14 @@ namespace Shopping
             }
             set
             {
+                char[] CharSpeciaux = { '!', '*', '+', '/' };
+                foreach (char charUnAuthorized in CharSpeciaux)
+                {
+                    if (value.Contains(charUnAuthorized))
+                    {
+                        throw new SpecialCharInDescriptionException();
+                    }
+                }
                 if (value.Length >= 50)
                 {
                     throw new TooLongDescriptionException();
@@ -44,10 +52,6 @@ namespace Shopping
                 {
                     throw new TooShortDescriptionException();
                 }
-                if (value.Any((ch) => !char.IsLetterOrDigit(ch) && !char.IsSeparator(ch)) )
-                {
-                    throw new SpecialCharInDescriptionException();
-                } 
                 _description = value;
             }
         }
